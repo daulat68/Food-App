@@ -1,0 +1,30 @@
+{
+  "homepage": "https://your-daulat68.github.io/ReactCourse",
+  "name": "episode4",
+  "version": "1.0.0",
+  "scripts": {
+    "predeploy": "parcel build index.html --public-url ./",
+    "deploy": "gh-pages -d dist",
+    "test": "jest",
+    "start": "parcel index.html",
+    "build": "parcel build index.html"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "gh-pages": "^6.3.0",
+    "parcel": "^2.13.3",
+    "process": "^0.11.10"
+  },
+  "dependencies": {
+    "@reduxjs/toolkit": "^2.6.1",
+    "@tailwindcss/postcss": "^4.0.12",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "react-redux": "^9.2.0",
+    "react-router": "^7.4.0",
+    "react-router-dom": "^6.22.0",
+    "tailwindcss": "^4.0.12"
+  }
+}
