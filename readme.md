@@ -23,8 +23,7 @@ This is a food ordering application built using **React** and **Parcel**. It fet
 ### Clone the repository
 ```sh
 git clone https://github.com/daulat68/Food-App.git
-cd ReactCourse
-cd Episode4AndMore
+cd Food-App
 ```
 
 ### Install dependencies
