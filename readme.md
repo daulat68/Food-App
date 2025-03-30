@@ -81,4 +81,4 @@ npm run build   # Creates a production build
 ```
 
 ## Visit Site
-https://restaurantappdaulat.netlify.app/
+https://food-app-by-daulat.netlify.app/
