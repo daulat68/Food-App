@@ -40,7 +40,11 @@ Parcel will start the dev server and hot-reload changes.
 ## Project Structure
 ```
 Food-App/
+├── public/
+│   ├── logo.png/
 ├── src/
+│   ├── assets/
+│   │   ├── logo.png
 │   ├── components/
 │   │   ├── About.js
 │   │   ├── Body.js
