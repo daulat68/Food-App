@@ -11,8 +11,8 @@ const Cart = () => {
     };
 
     return (
-        <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 p-6">
-            <h1 className="text-3xl font-bold text-gray-800 mb-4 mt-6">🛒 Shopping Cart</h1>
+        <div className="flex flex-col items-center bg-white p-6">
+            <h1 className="text-3xl font-bold text-gray-800 mb-4">🛒 Shopping Cart</h1>
             <div className="w-full max-w-2xl bg-white shadow-lg rounded-lg p-6">
                 {cartItems.length === 0 ? (
                     <h2 className="text-lg text-gray-500 text-center">

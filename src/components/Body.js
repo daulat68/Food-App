@@ -50,59 +50,79 @@ const Body = () => {
     }
 
     return(
-        <div className="body">
-            <div className="filter flex">
-                <div className="m-4 p-4">
-                    <input type="text" className="border border-black p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500" placeholder="Search" value={searchText} onChange={(e) => {
-                        setSearchText(e.target.value)
-                    }}/>
-                    
-                    <button className="px-6 py-2 bg-green-600 text-white font-semibold rounded-lg shadow-md 
-                            hover:bg-green-700 transition duration-300 ease-in-out 
-                            focus:outline-none focus:ring-2 focus:ring-green-400 m-4"
-                    onClick={() => {
-                        console.log(searchText);
-                        const filteredRestaurant = listOfRestaurants.filter((res) =>
-                            res.info?.name?.toLowerCase().includes(searchText.toLowerCase())
-                        );
-                        setFilteredRestaurant(filteredRestaurant);
-                    }}
-                    >Search
-                    </button>
-                </div>
-                <div className="search m-4 p-4 flex items-center">
-                <button className="px-4 py-2 bg-pink-500 rounded-lg hover:bg-opacity-20 transition-transform transform hover:scale-105 text-white" onClick= 
-                {()=> {
-                    const filteredList = listOfRestaurants.filter((res) => 
-                        res.info.avgRating>4.3)
-                    setFilteredRestaurant(filteredList)
-                    }}
-                    >
-                    Top Rated Restaurants
-                </button>
-                </div>
-
-                <div className="search m-4 p-4 flex items-center space-x-2">
-                    <label className="font-semibold">UserName:</label>
-                    <input className="border border-black p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    value={loggedInUser} 
-                    onChange={(e) => { if (e.target.value.length <= 20) {
-                        setUserName(e.target.value);
-                        }   
-                    }}
-                    maxLength={20} 
-                    placeholder="Enter your username"/>
-            </div>
-
-            </div>
-            <div className="flex flex-wrap justify-center gap-6">
-                {
-                  filteredRestaurant.map((restaurant) => (<Link key={restaurant.info.id} to={"/restaurants/" + restaurant.info.id}>
-                    {restaurant.info.promoted ? <RestaurantCardPromoted resData={restaurant} /> :
-                    <RestaurantCard resData={restaurant}/>}</Link>))
-                }
-            </div>
+        <div className="py-6">
+    {/* Filter Section */}
+    <div className="filter flex flex-wrap justify-center gap-4">
+        
+        {/* Search Box */}
+        <div className="p-4 flex flex-col sm:flex-row items-center space-x-2">
+            <input 
+                type="text" 
+                className="border border-black p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 w-full max-w-xs sm:max-w-md"
+                placeholder="Search"
+                value={searchText}
+                onChange={(e) => setSearchText(e.target.value)}
+            />
+            <button 
+                className="px-6 py-2 bg-green-600 text-white font-semibold rounded-lg shadow-md 
+                           hover:bg-green-700 transition duration-300 ease-in-out 
+                           focus:outline-none focus:ring-2 focus:ring-green-400 mt-2 sm:mt-0"
+                onClick={() => {
+                    console.log(searchText);
+                    const filteredRestaurant = listOfRestaurants.filter((res) =>
+                        res.info?.name?.toLowerCase().includes(searchText.toLowerCase())
+                    );
+                    setFilteredRestaurant(filteredRestaurant);
+                }}
+            >
+                Search
+            </button>
         </div>
+
+        {/* Top Rated Button */}
+        <div className="search p-4 flex items-center">
+            <button 
+                className="px-4 py-2 bg-pink-500 rounded-lg hover:bg-opacity-20 transition-transform 
+                           transform hover:scale-105 text-white"
+                onClick={() => {
+                    const filteredList = listOfRestaurants.filter((res) => res.info.avgRating > 4.3);
+                    setFilteredRestaurant(filteredList);
+                }}
+            >
+                Top Rated Restaurants
+            </button>
+        </div>
+
+        {/* Username Input */}
+        <div className="search p-4 flex flex-col sm:flex-row items-center space-x-2">
+            <label className="font-semibold">UserName:</label>
+            <input 
+                className="border border-black p-2 rounded-md focus:outline-none focus:ring-2 
+                           focus:ring-blue-500 w-full max-w-xs sm:max-w-md"
+                value={loggedInUser} 
+                onChange={(e) => { 
+                    if (e.target.value.length <= 20) setUserName(e.target.value);
+                }}
+                maxLength={20}
+                placeholder="Enter your username"
+            />
+        </div>
+    </div>
+
+    {/* Restaurants Grid */}
+    <div className="flex flex-wrap justify-center gap-6">
+        {filteredRestaurant.map((restaurant) => (
+            <Link key={restaurant.info.id} to={"/restaurants/" + restaurant.info.id}>
+                {restaurant.info.promoted ? (
+                    <RestaurantCardPromoted resData={restaurant} />
+                ) : (
+                    <RestaurantCard resData={restaurant} />
+                )}
+            </Link>
+        ))}
+    </div>
+</div>
+
     );
 };
 

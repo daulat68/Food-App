@@ -1,6 +1,6 @@
 const Contact = () => {
   return (
-    <div className="flex flex-col items-center justify-center mt-10 p-6">
+    <div className="flex flex-col items-center justify-center  p-6">
       <h1 className="text-3xl font-bold text-gray-800 mb-4">Contact Us</h1>
       <p className="text-lg text-gray-600 text-center max-w-md">
         We'd love to hear from you! Reach out to us for any queries or support.

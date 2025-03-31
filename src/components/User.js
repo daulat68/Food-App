@@ -8,7 +8,7 @@ const User = ({ name }) => {
       <div className="mb-4">
         <h1 className="text-2xl font-bold text-gray-800">{name}</h1>
         <h3 className="text-lg text-gray-600">📍 Location: Jaipur</h3>
-        <h4 className="text-md text-gray-500">📧 Contact: daulatsingh7878@gmail.com</h4>
+        <h4 className="text-md text-gray-500 break-words sm:text-lg">📧 Contact: daulatsingh7878@gmail.com</h4>
       </div>
       <div className="flex justify-center items-center space-x-4">
         <button
