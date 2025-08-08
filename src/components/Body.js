@@ -9,17 +9,39 @@ const Body = () => {
 
     const [listOfRestaurants, setListOfRestaurant] = useState([]);
     const [filteredRestaurant, setFilteredRestaurant] = useState([]);
-
+    const [coords, setCoords] = useState(null);
+    const [loading, setLoading] = useState(true);
     const [searchText, setSearchText] = useState("");
     const RestaurantCardPromoted = withPromotedLabel(RestaurantCard);
 
-    useEffect( () => {
-        fetchData();
-    }, []);
+    useEffect(() => {
+        // Fetch geolocation on component mount
+        if (!navigator.geolocation) {
+        alert("Geolocation is not supported by your browser.");
+        setLoading(false);
+        return;
+        }
 
-    const fetchData = async () => {
+        navigator.geolocation.getCurrentPosition(
+        (position) => {
+            const { latitude, longitude } = position.coords;
+            setCoords({ lat: latitude, lng: longitude });
+        },
+        (error) => {
+            console.error("Error getting location:", error.message);
+            alert("Could not fetch your location.");
+            setLoading(false);
+        }
+        );
+    }, []);
+    useEffect(() => {
+        // Once coordinates are available, fetch restaurants
+        if (coords) fetchData(coords.lat, coords.lng);
+    }, [coords]);
+
+    const fetchData = async (lat, lng) => {
         const data = await fetch(
-            "https://www.swiggy.com/dapi/restaurants/list/v5?lat=26.7750872&lng=75.8513938"
+            `https://food-bpwv.onrender.com/api/restaurants?lat=${lat}&lng=${lng}`
         );
 
         const json = await data.json();
