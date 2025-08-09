@@ -6,13 +6,20 @@ const useRestaurantMenu = (resId) => {
     const [resInfo, setResInfo] = useState(null);
 
     useEffect(() => {
-        fetchData();
-    }, [])
+        if (resId) {
+            fetchData();
+        }
+    }, [resId])
 
     const fetchData = async () => {
-    const data = await fetch(MENU_API + resId);
-    const json = await data.json();
-    setResInfo(json.data);
+    try {
+            const menuUrl = await MENU_API(resId);
+            const data = await fetch(menuUrl);
+            const json = await data.json();
+            setResInfo(json.data);
+        } catch (error) {
+            console.error("Error fetching menu:", error);
+        }
     }
 
     return resInfo;

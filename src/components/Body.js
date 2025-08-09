@@ -4,6 +4,7 @@ import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
 import useOnlineStatus from "../utils/useOnlineStatus";
 import UserContext from "../utils/UserContext";
+import { locationPromise } from "../utils/constants";
 
 const Body = () => {
 
@@ -15,24 +16,15 @@ const Body = () => {
     const RestaurantCardPromoted = withPromotedLabel(RestaurantCard);
 
     useEffect(() => {
-        // Fetch geolocation on component mount
-        if (!navigator.geolocation) {
-        alert("Geolocation is not supported by your browser.");
-        setLoading(false);
-        return;
-        }
-
-        navigator.geolocation.getCurrentPosition(
-        (position) => {
-            const { latitude, longitude } = position.coords;
-            setCoords({ lat: latitude, lng: longitude });
-        },
-        (error) => {
-            console.error("Error getting location:", error.message);
-            alert("Could not fetch your location.");
-            setLoading(false);
-        }
-        );
+        locationPromise
+            .then(({ lat, lng }) => {
+                setCoords({ lat, lng });
+            })
+            .catch((error) => {
+                console.error("Error getting location:", error);
+                alert("Could not fetch your location.");
+                setLoading(false);
+            });
     }, []);
     useEffect(() => {
         // Once coordinates are available, fetch restaurants
